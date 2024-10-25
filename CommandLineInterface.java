@@ -60,6 +60,39 @@ public class CommandLineInterface {
         }
     }
 
+    public static void rmdir(String name){
+        File file = new File(name);
+        if (file.list().length > 0) {
+            System.out.println( name + ": is not empty");
+        }
+        else{
+            file.delete();
+            System.out.println( name + ": is deleted");
+        }
+    }
+
+    public static void mv(String name1, String name2) {
+        File sourceFile = new File(name1);
+        File destinationFile = new File(name2);
+
+        if (!sourceFile.exists()) {
+            System.out.println(name1 + ": is not exist");
+            return;
+        }
+
+        if (sourceFile.exists()||destinationFile.exists()) {
+            sourceFile.renameTo(destinationFile);
+            System.out.println("File moved successfully.");
+        } else {
+            System.out.println("failed to move file");
+        }
+    }
+
+
+    public void exit() {
+        System.exit(0);
+    }
+
     public void help() {
 
     }
