@@ -115,13 +115,14 @@ public class CommandLineInterface {
         }
     }
 
-    public void rm(String name) {
+    public boolean rm(String name) {
         File file = new File(name);
         if (file.exists()) {
             file.delete();
+            return true;
 
         } else {
-            System.out.println("No such file exists");
+            return false;
         }
     }
 
@@ -148,19 +149,20 @@ public class CommandLineInterface {
         }
     }
 
-    public void touch(String name) throws IOException {
+    public static boolean touch(String name) throws IOException {
         File file = new File(name);
         if (file.exists()) {
-            System.out.println("File already exists");
+            return false;
         } else {
             file.createNewFile();
+            return true;
         }
     }
 
     public static boolean Mkdir(String name) {
         File file = new File(name);
         if (file.isDirectory()) {
-            return true;
+            return false;
         } else {
             file.mkdir();
             return true;
