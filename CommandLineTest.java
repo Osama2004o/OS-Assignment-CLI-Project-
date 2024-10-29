@@ -93,4 +93,40 @@ public class CommandLineTest {
         assertFalse(cli.rm("test.txt"));
     }
 
+    @Test
+    void testrmdir(){
+        CommandLineInterface cli = new CommandLineInterface();
+        assertTrue(cli.rmdir("test"));
+    }
+
+    @Test
+    void testRmdirNotEmpty(){
+        CommandLineInterface cli = new CommandLineInterface();
+        assertFalse(cli.rmdir("test"));
+    }
+
+    @Test
+    void testRmdirNotExist(){
+        CommandLineInterface cli = new CommandLineInterface();
+        assertFalse(cli.rmdir("test"));
+    }
+
+    @Test
+    void testmv() {
+        CommandLineInterface cli = new CommandLineInterface();
+        assertTrue(cli.mv("test.txt"));
+    }
+
+    @Test
+    void testMvSourceFileNotExist() {
+        CommandLineInterface cli = new CommandLineInterface();
+        assertFalse(cli.mv("test.txt"));
+    }
+
+    @Test
+    void testMvDestinationFileNotExist() {
+        CommandLineInterface cli = new CommandLineInterface();
+        assertFalse(cli.mv("test.txt"));
+    }
+
 }
