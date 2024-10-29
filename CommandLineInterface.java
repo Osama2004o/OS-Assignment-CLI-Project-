@@ -195,6 +195,26 @@ public class CommandLineInterface {
             System.out.println("failed to move file");
         }
     }
+    
+    public static boolean writeToFile(String fileName, String content) {
+        try (FileWriter writer = new FileWriter(fileName, false)) { 
+            writer.write(content);
+            return true; 
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean appendToFile(String fileName, String content) {
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+            writer.write(content + System.lineSeparator());
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public void exit() {
         System.exit(0);
