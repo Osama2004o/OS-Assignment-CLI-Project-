@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -67,6 +68,26 @@ public class CommandLineInterface {
                         mv(parts[1], parts[2]);
                     }
                     break;
+                case "writeToFile":
+                    if (parts.length > 1) {
+                        if (parts[2].charAt(0) == 'p') {
+                            writeToFile(parts[1], pwd());
+
+                        } else {
+                            writeToFile(parts[1], parts[2]);
+                        }
+                    }
+                    break;
+                case "appendToFile":
+                    if (parts.length > 1) {
+                        if (parts[2].charAt(0) == 'p') {
+                            appendToFile(parts[1], pwd());
+
+                        } else {
+                            appendToFile(parts[1], parts[2]);
+                        }
+                    }
+                    break;
                 case "exit":
                     exit();
                     return;
@@ -79,8 +100,8 @@ public class CommandLineInterface {
         }
     }
 
-    public static void pwd() {
-        System.out.println(System.getProperty("user.dir"));
+    public static String pwd() {
+        return System.getProperty("user.dir");
     }
 
     public static void cd(String path) {
@@ -169,37 +190,41 @@ public class CommandLineInterface {
         }
     }
 
-    public static void rmdir(String name) {
+    public static boolean rmdir(String name) {
         File file = new File(name);
+        if (!file.isDirectory()) {
+            return false;
+        }
         if (file.list().length > 0) {
-            System.out.println(name + ": is not empty");
+            return false;
         } else {
             file.delete();
-            System.out.println(name + ": is deleted");
+            return true;
         }
     }
 
-    public static void mv(String name1, String name2) {
+    public static boolean mv(String name1, String name2) {
         File sourceFile = new File(name1);
         File destinationFile = new File(name2);
 
         if (!sourceFile.exists()) {
-            System.out.println(name1 + ": is not exist");
-            return;
+            return false;
         }
 
         if (sourceFile.exists() || destinationFile.exists()) {
             sourceFile.renameTo(destinationFile);
-            System.out.println("File moved successfully.");
+
+            return true;
         } else {
-            System.out.println("failed to move file");
+
+            return false;
         }
     }
-    
+
     public static boolean writeToFile(String fileName, String content) {
-        try (FileWriter writer = new FileWriter(fileName, false)) { 
+        try (FileWriter writer = new FileWriter(fileName, false)) {
             writer.write(content);
-            return true; 
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;

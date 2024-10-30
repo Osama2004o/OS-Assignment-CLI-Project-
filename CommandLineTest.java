@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.*;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,7 +34,7 @@ public class CommandLineTest {
 
     @Test
     void testMkdir() {
-        assertTrue(CommandLineInterface.Mkdir("testDir"));
+        assertTrue(CommandLineInterface.Mkdir("test"));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class CommandLineTest {
 
         System.setOut(originalOut);
 
-        String expectedOutput = "test";
+        String expectedOutput = "test1";
         String actualOutput = bos.toString().trim();
 
         assertFalse(expectedOutput == actualOutput);
@@ -94,19 +94,19 @@ public class CommandLineTest {
     }
 
     @Test
-    void testrmdir(){
+    void testrmdir() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertTrue(cli.rmdir("test"));
+        assertTrue(CommandLineInterface.rmdir("test"));
     }
 
     @Test
-    void testRmdirNotEmpty(){
+    void testRmdirNotEmpty() {
         CommandLineInterface cli = new CommandLineInterface();
         assertFalse(cli.rmdir("test"));
     }
 
     @Test
-    void testRmdirNotExist(){
+    void testRmdirNotExist() {
         CommandLineInterface cli = new CommandLineInterface();
         assertFalse(cli.rmdir("test"));
     }
@@ -114,19 +114,19 @@ public class CommandLineTest {
     @Test
     void testmv() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertTrue(cli.mv("test.txt"));
+        assertTrue(cli.mv("test.txt", "test1.txt"));
     }
 
     @Test
     void testMvSourceFileNotExist() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertFalse(cli.mv("test.txt"));
+        assertFalse(cli.mv("test.txt", "test1.txt"));
     }
 
     @Test
     void testMvDestinationFileNotExist() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertFalse(cli.mv("test.txt"));
+        assertFalse(cli.mv("test.txt", "test1.txt"));
     }
 
 }
