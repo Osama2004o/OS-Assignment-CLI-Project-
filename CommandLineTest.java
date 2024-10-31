@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class CommandLineTest {
 
@@ -170,6 +171,31 @@ public class CommandLineTest {
         System.setOut(originalOut);
         String output = bos.toString().trim();
         assertFalse(output.isEmpty());
+    }
+
+    @Test
+    void testWriteToFile() throws FileNotFoundException {
+        String fileName = "test.txt";
+        File file = new File(fileName);
+        CommandLineInterface cli = new CommandLineInterface();
+        cli.writeToFile(fileName, CommandLineInterface.pwd()); // p is pwd but i write it as this
+        Scanner myReader = new Scanner(file);
+        String line = myReader.nextLine();
+        assertEquals(line, CommandLineInterface.pwd());
+    }
+
+    @Test
+    void testAppendToFile() throws FileNotFoundException {
+        String fileName = "test.txt";
+        File file = new File(fileName);
+        CommandLineInterface cli = new CommandLineInterface();
+        Scanner myReader = new Scanner(file);
+        String line1 = myReader.nextLine();
+        cli.appendToFile(fileName, "123");
+        Scanner myReader1 = new Scanner(file);
+        String line2 = myReader1.nextLine();
+
+        assertEquals(line1 += "123", line2);
     }
 
 }
