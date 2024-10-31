@@ -129,4 +129,47 @@ public class CommandLineTest {
         assertFalse(cli.mv("test.txt", "test1.txt"));
     }
 
+    @Test
+    void testPwd() {
+        String actualOutput = CommandLineInterface.pwd();
+        String expectedOutput = System.getProperty("user.dir");
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testCd() {
+        String newPath = "testDir";
+        File expectedDir = new File(newPath).getAbsoluteFile();
+        assertTrue(CommandLineInterface.cd(newPath));
+        assertEquals(expectedDir.getPath(), System.getProperty("user.dir"));
+    }
+
+    @Test
+    void testCdInvalidDirectory() {
+        String invalidPath = "nonexistentDirectory";
+        assertFalse(CommandLineInterface.cd(invalidPath));
+    }
+
+    @Test
+    void testLsA() {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        CommandLineInterface.ls("-a");
+        System.setOut(originalOut);
+        String output = bos.toString().trim();
+        assertTrue(output.contains("."));
+    }
+
+    @Test
+    void testLsR() {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        CommandLineInterface.ls("-r");
+        System.setOut(originalOut);
+        String output = bos.toString().trim();
+        assertFalse(output.isEmpty());
+    }
+
 }

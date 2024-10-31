@@ -101,16 +101,19 @@ public class CommandLineInterface {
     }
 
     public static String pwd() {
+        System.out.println(System.getProperty("user.dir"));
         return System.getProperty("user.dir");
     }
 
-    public static void cd(String path) {
+    public static boolean cd(String path) {
         File newDir = new File(path);
         if (newDir.isDirectory()) {
             System.setProperty("user.dir", newDir.getAbsolutePath());
             System.out.println("Changed directory to: " + newDir.getAbsolutePath());
+            return true;
         } else {
             System.out.println("Error: Not a valid directory");
+            return false;
         }
     }
 
@@ -258,8 +261,11 @@ public class CommandLineInterface {
         System.out.println("Mkdir makes a directory");
         System.out.println("rmdir removes a directory if it's empty");
         System.out.println("mv moves one or more files/directories to a directory");
+        System.out.println("writeToFile adds the output of string or command to file");
+        System.out.println("appendToFile append the output of command to the file without removing the first");
         System.out.println("exit - Exit the CLI");
         System.out.println("help - Display this help message");
+
     }
 
 }
