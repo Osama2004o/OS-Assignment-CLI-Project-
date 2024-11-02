@@ -91,7 +91,7 @@ public class CommandLineTest {
     @Test
     void testRmFileNotFound() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertFalse(cli.rm("test.txt"));
+        assertFalse(cli.rm("test1.txt"));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class CommandLineTest {
     @Test
     void testRmdirNotEmpty() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertFalse(cli.rmdir("test"));
+        assertFalse(cli.rmdir("lib"));
     }
 
     @Test
@@ -121,13 +121,13 @@ public class CommandLineTest {
     @Test
     void testMvSourceFileNotExist() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertFalse(cli.mv("test.txt", "test1.txt"));
+        assertFalse(cli.mv("test2.txt", "test1.txt"));
     }
 
     @Test
     void testMvDestinationFileNotExist() {
         CommandLineInterface cli = new CommandLineInterface();
-        assertFalse(cli.mv("test.txt", "test1.txt"));
+        assertFalse(cli.mv("test3.txt", "test1.txt"));
     }
 
     @Test
@@ -194,7 +194,6 @@ public class CommandLineTest {
         cli.appendToFile(fileName, "123");
         Scanner myReader1 = new Scanner(file);
         String line2 = myReader1.nextLine();
-
         assertEquals(line1 += "123", line2);
     }
 

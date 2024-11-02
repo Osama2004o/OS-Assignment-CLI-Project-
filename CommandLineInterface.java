@@ -38,24 +38,28 @@ public class CommandLineInterface {
                     break;
                 case "rm":
                     if (parts.length > 1) {
-                        rm(parts[1]);
+                        for (int i = 1; i < parts.length; i++)
+                            rm(parts[i]);
                     } else {
                         System.out.println("No such file exist");
                     }
                     break;
                 case "touch":
                     if (parts.length > 1) {
-                        touch(parts[1]);
+                        for (int i = 1; i < parts.length; i++)
+                            touch(parts[i]);
                     }
                     break;
                 case "Mkdir":
                     if (parts.length > 1) {
-                        Mkdir(parts[1]);
+                        for (int i = 1; i < parts.length; i++)
+                            Mkdir(parts[i]);
                     }
                     break;
                 case "rmdir":
                     if (parts.length > 1) {
-                        rmdir(parts[1]);
+                        for (int i = 1; i < parts.length; i++)
+                            rmdir(parts[i]);
                     }
                     break;
                 case "cat":
